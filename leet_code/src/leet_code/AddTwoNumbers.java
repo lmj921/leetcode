@@ -18,6 +18,54 @@ public class AddTwoNumbers {
 
 	class Solution {
 		public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+			ListNode result = null;	
+			ListNode tempNode1=l1;
+			ListNode tempNode2=l2;
+			ListNode prior = null;
+			int flag=0;//进位？
+			do
+			{						
+				int a=0;
+				if(tempNode1!=null)
+				{
+					a=tempNode1.val;
+					tempNode1=tempNode1.next;
+				}
+				
+				int b=0;
+				if(tempNode2!=null)
+				{
+					b=tempNode2.val;
+					tempNode2=tempNode2.next;
+				}				
+				
+				int temp=a+b+flag;
+				if(temp>=10) {
+					flag=1;
+					temp=temp%10;
+				}else {
+					flag=0;
+				}
+				
+				if(result==null)
+				{
+					result = new ListNode(temp);
+					prior=result;
+				}else {
+					ListNode node = new ListNode(temp);
+					prior.next=node;
+					prior=node;
+				}							
+			}while(tempNode1!=null || tempNode2!=null || flag>0);
+
+			
+			return result;
+		}
+		
+		
+		
+		//越界问题
+		public ListNode addTwoNumbers_wrong(ListNode l1, ListNode l2) {
 			ListNode result;	
 			long factor=1;
 			long num1=0;
